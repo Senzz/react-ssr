@@ -1,8 +1,9 @@
 # Server Side Render based on create-react-app
-使用了koa框架，换成express也一样
+服务端使用了express框架
 ## feature
-- [x] 服务器渲染页面
-- [ ] 加入react-router
+对应相应的分支
+- [x] 服务器渲染页面 (branch: feat/render)
+- [x] 加入react-router (branch: feat/react-router)
 - [ ] 加入redux
 - [ ] 按需加载
 - [ ] 集成TypeScript
