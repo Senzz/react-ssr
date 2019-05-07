@@ -1,4 +1,4 @@
 {
-  "ignore": ["src/", "build/", "public/"],
+  "ignore": ["src/*", "build/*", "public/*"],
   "watch": ["server/*"]
 }
