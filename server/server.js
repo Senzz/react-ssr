@@ -1,18 +1,19 @@
-import Koa from 'koa2'
-import Router from 'koa-router'
+import express from 'express';
+import compression from 'compression';
 import React from 'react'
 import { renderToNodeStream } from 'react-dom/server'
 import App from '../src/App'
 import fs from 'fs'
 import path from 'path'
-import koaStatic from 'koa-static'
 
-const app = new Koa();
-const router = new Router();
+const app = express();
+const PORT = 3010;
 
-router.get('/', (ctx) => {
-  const res = ctx.res;
-  res.writeHead(200)
+const router = express.Router();
+app.use(compression());
+app.use(router)
+router.get('/', (req, res) => {
+  console.log(req.url)
   const indexHTML = fs.readFileSync(path.resolve(__dirname, '../build/index.html'), 'utf8'); 
 
   const indexHTMLArr = indexHTML.split('<div id="root"></div>');
@@ -26,10 +27,8 @@ router.get('/', (ctx) => {
   })
 })
 
-app.use(router.routes()).use(router.allowedMethods())
-app.use(koaStatic(
-  path.join(__dirname, '../build')
-))
-app.listen(3010, () => {
-  console.log('server listen 3010')
+app.use(express.static(path.resolve(__dirname, '../build')));
+
+app.listen(PORT, () => {
+  console.log(`server listen ${PORT}`)
 })
